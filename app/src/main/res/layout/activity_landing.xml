@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2E053A">  <!-- deep purple -->
+
+    <!-- Centered Logo: "ChatGPT" + green dot -->
+    <LinearLayout
+        android:id="@+id/logoContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomSheet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.45">
+
+        <TextView
+            android:id="@+id/logoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DocuLink"
+            android:textSize="44sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#7AF36B"
+        android:letterSpacing="0.01"/>
+
+        <View
+            android:id="@+id/greenDot"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle_green"/>
+    </LinearLayout>
+
+    <!-- Bottom rounded sheet -->
+    <FrameLayout
+        android:id="@+id/bottomSheet"
+        android:layout_width="0dp"
+        android:layout_height="280dp"
+
+        android:paddingTop="20dp"
+        android:paddingBottom="26dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bottom_sheet_bg">
+
+        <LinearLayout
+            android:id="@+id/buttonColumn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp">
+
+            <!-- Continue with Google -->
+            <LinearLayout
+                android:id="@+id/btnGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/google_button_bg"
+                android:layout_marginBottom="14dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp">
+
+                <!-- Simple G circle as icon -->
+                <TextView
+                    android:id="@+id/googleIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:text="G"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#4285F4"
+                    android:background="@drawable/google_g_circle" />
+
+                <TextView
+                    android:id="@+id/googleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Continue with Google"
+                    android:textSize="18sp"
+                    android:textColor="#111111"
+                    android:gravity="center"
+                    android:paddingStart="8dp"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+
+            <!-- Sign up -->
+            <TextView
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center"
+                android:text="Sign up"
+                android:textSize="18sp"
+                android:textColor="#111111"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/button_rounded_white"
+                android:layout_marginBottom="18dp"/>
+
+            <!-- Log in (outlined) -->
+            <TextView
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center"
+                android:text="Log in"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/button_rounded_transparent"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
