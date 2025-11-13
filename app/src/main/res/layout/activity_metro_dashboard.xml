@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/metroScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ml_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/txtMetroTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="KOCHI METRO DASHBOARD"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/ml_primary" />
+
+            <Button
+                android:id="@+id/btnRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Safety Supervisor" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Metro Link AI System • Document Processing &amp; Management"
+            android:textSize="13sp"
+            android:textColor="@color/ml_muted"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/ml_card_bg"
+                android:padding="16dp"
+                android:elevation="2dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Documents Processed"
+                    android:textSize="13sp"
+                    android:textColor="@color/ml_muted" />
+
+                <TextView
+                    android:id="@+id/txtDocsProcessed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1,247"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/ml_primary"
+                    android:paddingTop="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+12% from last month"
+                    android:textSize="12sp"
+                    android:textColor="@color/ml_muted"
+                    android:paddingTop="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/ml_card_bg"
+                android:padding="16dp"
+                android:elevation="2dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending Reviews"
+                    android:textSize="13sp"
+                    android:textColor="@color/ml_muted" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/ml_primary"
+                    android:paddingTop="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Requires human review"
+                    android:textSize="12sp"
+                    android:textColor="@color/ml_muted"
+                    android:paddingTop="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@color/ml_card_bg"
+                android:padding="16dp"
+                android:elevation="2dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Active Notifications"
+                    android:textSize="13sp"
+                    android:textColor="@color/ml_muted" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/ml_primary"
+                    android:paddingTop="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Urgent matters"
+                    android:textSize="12sp"
+                    android:textColor="@color/ml_muted"
+                    android:paddingTop="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Human Review Tasks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/ml_primary"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ml_card_bg"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incident Report - Signal Failure"
+                android:textStyle="bold"
+                android:textColor="@color/ml_primary"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="high"
+                android:textSize="11sp"
+                android:padding="4dp"
+                android:background="@color/ml_badge_high"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submitted by: Station Master - Aluva"
+                android:textSize="12sp"
+                android:textColor="@color/ml_muted" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnOpenDocuments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Embedded Documents"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+</ScrollView>
+
+
+

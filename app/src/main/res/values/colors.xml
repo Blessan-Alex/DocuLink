@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Metro light theme palette -->
+    <color name="ml_bg">#F5F7FB</color>
+    <color name="ml_card_bg">#FFFFFFFF</color>
+    <color name="ml_primary">#111827</color>
+    <color name="ml_accent">#111827</color>
+    <color name="ml_muted">#6B7280</color>
+    <color name="ml_chip_bg">#EEF2FF</color>
+    <color name="ml_chip_text">#4B5563</color>
+    <color name="ml_badge_high">#F97373</color>
+    <color name="ml_badge_medium">#FACC15</color>
 </resources>

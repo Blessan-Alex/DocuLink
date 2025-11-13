@@ -22,7 +22,7 @@ class LandingActivity : AppCompatActivity() {
             insets
         }
 
-        // Continue with Google – for now, just proceed to chat
+        // Continue with Google – go straight to chat
         findViewById<LinearLayout>(R.id.btnGoogle).setOnClickListener {
             startActivity(Intent(this, ChatActivity::class.java))
         }

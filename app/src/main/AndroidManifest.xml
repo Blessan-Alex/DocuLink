@@ -21,6 +21,12 @@
             android:name=".ChatActivity"
             android:exported="false" />
         <activity
+            android:name=".EmbeddedDocumentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MetroDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".LandingActivity"
             android:exported="true">
             <intent-filter>

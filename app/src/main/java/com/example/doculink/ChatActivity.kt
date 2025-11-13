@@ -1,5 +1,6 @@
 package com.example.doculink
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.inputmethod.EditorInfo
@@ -9,14 +10,18 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 
 class ChatActivity : AppCompatActivity() {
 
+    private lateinit var drawerLayout: DrawerLayout
     private lateinit var input: EditText
-    private lateinit var sendBtn: ImageButton   // using btnMic as "send" for now
+    private lateinit var sendBtn: ImageButton
     private lateinit var chatScroll: ScrollView
     private lateinit var chatContainer: LinearLayout
 
@@ -25,7 +30,9 @@ class ChatActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_chat)
 
-        // Apply insets to the correct root (id = chat_root in your XML)
+        drawerLayout = findViewById(R.id.drawerLayout)
+
+        // Apply insets to correct root (chat_root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.chat_root)) { v, insets ->
             val sb = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(sb.left, sb.top, sb.right, sb.bottom)
@@ -33,11 +40,23 @@ class ChatActivity : AppCompatActivity() {
         }
 
         input = findViewById(R.id.inputMessage)
-        sendBtn = findViewById(R.id.btnMic) // treat as "Send"
+        sendBtn = findViewById(R.id.btnMic)
         chatScroll = findViewById(R.id.chatScroll)
         chatContainer = findViewById(R.id.chatContainer)
 
-        // Send on button
+        findViewById<ImageButton>(R.id.btnMenu).setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        findViewById<TextView>(R.id.navDashboard).setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            startActivity(Intent(this, MetroDashboardActivity::class.java))
+        }
+        findViewById<TextView>(R.id.navDocuments).setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            startActivity(Intent(this, EmbeddedDocumentsActivity::class.java))
+        }
+
+        // Send on button click
         sendBtn.setOnClickListener { submitMessage() }
 
         // Send on keyboard action
@@ -46,6 +65,17 @@ class ChatActivity : AppCompatActivity() {
                 submitMessage()
                 true
             } else false
+        }
+
+        // -----------------------------------------------------
+        // ✅ NEW Back-Press Handling (replaces deprecated method)
+        // -----------------------------------------------------
+        onBackPressedDispatcher.addCallback(this) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                finish()
+            }
         }
     }
 
@@ -56,17 +86,14 @@ class ChatActivity : AppCompatActivity() {
         addMessageBubble(text, isUser = true)
         input.setText("")
 
-        // "typing…" placeholder
+        // Typing placeholder
         val typingView = addMessageBubble("…", isUser = false, isPlaceholder = true)
 
-        // NOTE: Http.sendQuery returns a String (the summary), not the full object.
         Http.sendQuery(
             query = text,
             onSuccess = { reply: String ->
                 runOnUiThread {
-                    // Replace placeholder with AI answer (preserve bullets/newlines)
                     replaceBubbleText(typingView, pretty(reply))
-                    // (Sources panel removed because Http.kt only returns String)
                     scrollToBottom()
                 }
             },
@@ -90,7 +117,6 @@ class ChatActivity : AppCompatActivity() {
             textSize = 16f
             setPadding(28, 20, 28, 20)
 
-            // readability
             maxWidth = (resources.displayMetrics.widthPixels * 0.85f).toInt()
             setLineSpacing(0f, 1.2f)
             isClickable = true
@@ -100,9 +126,9 @@ class ChatActivity : AppCompatActivity() {
             movementMethod = LinkMovementMethod.getInstance()
 
             background = if (isUser) {
-                getDrawable(R.drawable.bubble_user) // right-aligned style (e.g., purple bubble)
+                getDrawable(R.drawable.bubble_user)
             } else {
-                getDrawable(R.drawable.bubble_bot)  // left-aligned style (e.g., dark gray bubble)
+                getDrawable(R.drawable.bubble_bot)
             }
         }
 
@@ -130,10 +156,8 @@ class ChatActivity : AppCompatActivity() {
         chatScroll.post { chatScroll.fullScroll(ScrollView.FOCUS_DOWN) }
     }
 
-    // ---------- helpers for rendering ----------
-
+    // ---------- helpers ----------
     private fun pretty(text: String): CharSequence {
-        // keep newlines; convert markdown bullets to • ; strip markdown headers
         return text
             .replace(Regex("(?m)^\\s*[-*]\\s+"), "• ")
             .replace(Regex("(?m)^#+\\s*"), "")

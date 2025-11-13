@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="2dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txtDocTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Document Title"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/ml_primary" />
+
+        <TextView
+            android:id="@+id/txtDocTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Financial"
+            android:textSize="11sp"
+            android:textColor="@color/ml_chip_text"
+            android:background="@color/ml_chip_bg"
+            android:padding="4dp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/txtDocDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Short description of the document."
+            android:textSize="13sp"
+            android:textColor="@color/ml_muted"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/txtDocMeta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025-01-15 • 2.3 MB"
+            android:textSize="11sp"
+            android:textColor="@color/ml_muted"
+            android:layout_marginTop="6dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+
+
