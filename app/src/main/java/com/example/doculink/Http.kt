@@ -8,9 +8,11 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class Http {
+
     companion object {
         // USB reverse example (adb reverse tcp:8080 tcp:8000)
         private const val BASE_URL = "http://127.0.0.1:8080/"
+
         private val gson = Gson()
 
         fun sendQuery(

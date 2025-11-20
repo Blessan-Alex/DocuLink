@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769911380594",
+    "project_id": "doculink-2c4a3",
+    "storage_bucket": "doculink-2c4a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769911380594:android:2b2f3fe5f40d7f508e40eb",
+        "android_client_info": {
+          "package_name": "com.example.doculink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXpoq5fRTZUSe86whKEqKKiHjHob1KV4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

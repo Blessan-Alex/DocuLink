@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/metroScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ml_bg">
+    android:background="@color/ml_primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,55 +12,59 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Title + role pill -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingBottom="16dp">
+            android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/txtMetroTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="KOCHI METRO DASHBOARD"
+                android:text="DocuLink Dashboard"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/ml_primary" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnRole"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Safety Supervisor" />
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="Pivacy Guaranteed"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:background="@color/ml_chip_bg" />
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Metro Link AI System • Document Processing &amp; Management"
+            android:text="DocuLink AI • Document processing &amp; human-in-the-loop review"
             android:textSize="13sp"
             android:textColor="@color/ml_muted"
             android:paddingBottom="16dp" />
 
-        <LinearLayout
+        <!-- Stats cards: vertically stacked, simple -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:paddingBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@color/ml_card_bg"
                 android:padding="16dp"
-                android:elevation="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
+                android:background="@color/ml_card_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -72,7 +77,7 @@
                     android:id="@+id/txtDocsProcessed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1,247"
+                    android:text="10"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@color/ml_primary"
@@ -86,17 +91,21 @@
                     android:textColor="@color/ml_muted"
                     android:paddingTop="4dp" />
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@color/ml_card_bg"
                 android:padding="16dp"
-                android:elevation="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
+                android:background="@color/ml_card_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -122,16 +131,21 @@
                     android:textColor="@color/ml_muted"
                     android:paddingTop="4dp" />
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@color/ml_card_bg"
                 android:padding="16dp"
-                android:elevation="2dp"
-                android:layout_marginBottom="8dp">
+                android:background="@color/ml_card_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -152,13 +166,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Urgent matters"
+                    android:text="Urgent issues"
                     android:textSize="12sp"
                     android:textColor="@color/ml_muted"
                     android:paddingTop="4dp" />
             </LinearLayout>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
+        <!-- Human review block -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -166,52 +181,60 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/ml_primary"
-            android:paddingTop="16dp"
             android:paddingBottom="8dp" />
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/ml_card_bg"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:elevation="2dp">
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Incident Report - Signal Failure"
-                android:textStyle="bold"
-                android:textColor="@color/ml_primary"
-                android:paddingBottom="2dp" />
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@color/ml_card_bg">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="high"
-                android:textSize="11sp"
-                android:padding="4dp"
-                android:background="@color/ml_badge_high"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="4dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Incident Report – Signal Failure"
+                    android:textStyle="bold"
+                    android:textColor="@color/ml_primary"
+                    android:paddingBottom="4dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submitted by: Station Master - Aluva"
-                android:textSize="12sp"
-                android:textColor="@color/ml_muted" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HIGH"
+                    android:textSize="11sp"
+                    android:textAllCaps="true"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:background="@color/ml_badge_high"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submitted by: Station Master – Aluva"
+                    android:textSize="12sp"
+                    android:textColor="@color/ml_muted" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btnOpenDocuments"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
             android:text="View Embedded Documents"
-            android:layout_marginTop="24dp" />
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@color/ml_primary" />
 
     </LinearLayout>
 </ScrollView>
-
-
-

@@ -1,7 +1,9 @@
 package com.example.doculink
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.text.method.LinkMovementMethod
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -9,15 +11,18 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
 class ChatActivity : AppCompatActivity() {
+
+    private val REQ_CODE_SPEECH = 1001
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var input: EditText
@@ -40,9 +45,11 @@ class ChatActivity : AppCompatActivity() {
         }
 
         input = findViewById(R.id.inputMessage)
-        sendBtn = findViewById(R.id.btnMic)
+        sendBtn = findViewById(R.id.btnMic)              // right button = SEND
         chatScroll = findViewById(R.id.chatScroll)
         chatContainer = findViewById(R.id.chatContainer)
+
+        val micBtn: ImageButton = findViewById(R.id.btnAdd)   // left button = MIC
 
         findViewById<ImageButton>(R.id.btnMenu).setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
@@ -56,8 +63,11 @@ class ChatActivity : AppCompatActivity() {
             startActivity(Intent(this, EmbeddedDocumentsActivity::class.java))
         }
 
-        // Send on button click
+        // Send on button click (right icon)
         sendBtn.setOnClickListener { submitMessage() }
+
+        // Mic / voice input on left icon
+        micBtn.setOnClickListener { startVoiceInput() }
 
         // Send on keyboard action
         input.setOnEditorActionListener { _, actionId, _ ->
@@ -67,14 +77,52 @@ class ChatActivity : AppCompatActivity() {
             } else false
         }
 
-        // -----------------------------------------------------
-        // ✅ NEW Back-Press Handling (replaces deprecated method)
-        // -----------------------------------------------------
         onBackPressedDispatcher.addCallback(this) {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else {
                 finish()
+            }
+        }
+    }
+
+    private fun startVoiceInput() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            // Use whatever locale you prefer; en-IN is fine for India
+            // putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-IN")
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-IN,ml-IN");
+
+
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak your query for DocuLink")
+        }
+
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(
+                this,
+                "Speech input not supported on this device",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQ_CODE_SPEECH && resultCode == RESULT_OK && data != null) {
+            val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            val spokenText = result?.firstOrNull().orEmpty()
+
+            if (spokenText.isNotEmpty()) {
+                // Put recognized text into the input box; user can edit or just hit send
+                input.setText(spokenText)
+                input.setSelection(spokenText.length)
             }
         }
     }

@@ -5,9 +5,9 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2E053A">  <!-- deep purple -->
+    android:background="#2E053A">
 
-    <!-- Centered Logo: "ChatGPT" + green dot -->
+    <!-- Centered Logo -->
     <LinearLayout
         android:id="@+id/logoContainer"
         android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
             android:textColor="#7AF36B"
-        android:letterSpacing="0.01"/>
+            android:letterSpacing="0.01"/>
 
         <View
             android:id="@+id/greenDot"
@@ -43,8 +43,7 @@
     <FrameLayout
         android:id="@+id/bottomSheet"
         android:layout_width="0dp"
-        android:layout_height="280dp"
-
+        android:layout_height="320dp"
         android:paddingTop="20dp"
         android:paddingBottom="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,67 +60,70 @@
             android:paddingStart="18dp"
             android:paddingEnd="18dp">
 
-            <!-- Continue with Google -->
-            <LinearLayout
-                android:id="@+id/btnGoogle"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/google_button_bg"
-                android:layout_marginBottom="14dp"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp">
-
-                <!-- Simple G circle as icon -->
-                <TextView
-                    android:id="@+id/googleIcon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:gravity="center"
-                    android:text="G"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#4285F4"
-                    android:background="@drawable/google_g_circle" />
-
-                <TextView
-                    android:id="@+id/googleText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Continue with Google"
-                    android:textSize="18sp"
-                    android:textColor="#111111"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
-                    android:fontFamily="sans-serif-medium"/>
-            </LinearLayout>
-
-            <!-- Sign up -->
+            <!-- Title -->
             <TextView
-                android:id="@+id/btnSignUp"
+                android:id="@+id/loginTitle"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center"
-                android:text="Sign up"
+                android:layout_height="wrap_content"
+                android:text="Log in to DocuLink"
                 android:textSize="18sp"
-                android:textColor="#111111"
-                android:fontFamily="sans-serif-medium"
-                android:background="@drawable/button_rounded_white"
-                android:layout_marginBottom="18dp"/>
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="12dp"/>
 
-            <!-- Log in (outlined) -->
-            <TextView
+            <!-- Email -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:background="@drawable/button_rounded_white"
+                android:textColor="#111111"
+                android:textColorHint="#777777"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- Password -->
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:background="@drawable/button_rounded_white"
+                android:textColor="#111111"
+                android:textColorHint="#777777"
+                android:layout_marginBottom="14dp"/>
+
+            <!-- Log in button -->
+            <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center"
+                android:layout_height="52dp"
                 android:text="Log in"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif-medium"
-                android:background="@drawable/button_rounded_transparent"/>
+                android:background="@drawable/button_rounded_transparent"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Sign up text -->
+            <TextView
+                android:id="@+id/btnSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New here? Sign up"
+                android:textSize="14sp"
+                android:textColor="#111111"
+                android:layout_gravity="center"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
+
         </LinearLayout>
 
     </FrameLayout>

@@ -7,35 +7,45 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class DocumentAdapter(
-    private val items: List<DocumentItem>,
-    private val onItemClick: (DocumentItem) -> Unit
+    private var items: List<DocumentItem>,
+    private val onClick: (DocumentItem) -> Unit
 ) : RecyclerView.Adapter<DocumentAdapter.DocViewHolder>() {
 
-    inner class DocViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.txtDocTitle)
-        val tag: TextView = view.findViewById(R.id.txtDocTag)
-        val desc: TextView = view.findViewById(R.id.txtDocDescription)
-        val meta: TextView = view.findViewById(R.id.txtDocMeta)
+    inner class DocViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val title: TextView = itemView.findViewById(R.id.txtDocTitle)
+        val tag: TextView = itemView.findViewById(R.id.txtDocTag)
+        val desc: TextView = itemView.findViewById(R.id.txtDocDescription)
+        val meta: TextView = itemView.findViewById(R.id.txtDocMeta)
+        val status: TextView = itemView.findViewById(R.id.txtDocStatus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DocViewHolder {
-        val v = LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_document_card, parent, false)
-        return DocViewHolder(v)
+        return DocViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
-        val item = items[position]
-        holder.title.text = item.title
-        holder.tag.text = item.tag
-        holder.desc.text = item.description
-        holder.meta.text = "${item.date} • ${item.size}"
+        val doc = items[position]
+        holder.title.text = doc.title
+        holder.tag.text = doc.tag
+        holder.desc.text = doc.description
+        holder.meta.text = "${doc.date} • ${doc.size}"
 
-        holder.itemView.setOnClickListener { onItemClick(item) }
+        holder.status.text = when (doc.status) {
+            "embedding_in_progress" -> "Embedding in progress (~10 minutes)…"
+            "ready" -> "Embedded"
+            "failed" -> "Embedded"
+            else -> ""
+        }
+
+        holder.itemView.setOnClickListener { onClick(doc) }
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun submitList(newItems: List<DocumentItem>) {
+        items = newItems
+        notifyDataSetChanged()
+    }
 }
-
-
-

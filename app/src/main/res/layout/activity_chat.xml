@@ -11,192 +11,266 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- Top bar -->
-    <LinearLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
-
-        <!-- Left menu button -->
-        <ImageButton
-            android:id="@+id/btnMenu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circle_button_bg"
-            android:src="@drawable/ic_menu"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            app:tint="#FFFFFF" />
-
-        <!-- Upgrade button -->
-        <Button
-            android:id="@+id/btnUpgrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:text="DocuLink"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:background="@drawable/upgrade_button_bg"
-            android:paddingHorizontal="22dp"
-            android:paddingVertical="8dp"
-            android:textAllCaps="false" />
-
-        <!-- Right circular button -->
-        <ImageButton
-            android:id="@+id/btnProfile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circle_button_bg"
-            android:src="@drawable/ic_circle_dashed"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            app:tint="#FFFFFF" />
-    </LinearLayout>
-
-    <!-- Chat area -->
-    <ScrollView
-        android:id="@+id/chatScroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar"
-        android:layout_below="@id/topBar"
-        android:padding="16dp"
-        android:overScrollMode="never">
-
+        <!-- Top bar -->
         <LinearLayout
-            android:id="@+id/chatContainer"
+            android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-    <!-- Bottom input bar -->
-    <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#000000"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="10dp">
+            <!-- Left menu button -->
+            <ImageButton
+                android:id="@+id/btnMenu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_menu"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                app:tint="#FFFFFF" />
 
-        <!-- Plus button -->
-        <ImageButton
-            android:id="@+id/btnAdd"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/circle_button_bg"
-            android:src="@drawable/ic_add"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            app:tint="#FFFFFF" />
+            <!-- Title button -->
+            <Button
+                android:id="@+id/btnUpgrade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="DocuLink"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@drawable/upgrade_button_bg"
+                android:paddingHorizontal="22dp"
+                android:paddingVertical="8dp"
+                android:textAllCaps="false" />
 
-        <!-- Message input -->
-        <EditText
-            android:id="@+id/inputMessage"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="8dp"
-            android:background="@drawable/input_bg"
-            android:hint="Ask DocuLink"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
-            android:textSize="16sp"
-            android:inputType="text" />
+            <!-- Right circular button -->
+            <ImageButton
+                android:id="@+id/btnProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_circle_dashed"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                app:tint="#FFFFFF" />
+        </LinearLayout>
 
-        <!-- Mic / Voice button -->
-        <ImageButton
-            android:id="@+id/btnMic"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circle_button_bg"
-            android:src="@drawable/ic_mic"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            app:tint="#FFFFFF" />
-    </LinearLayout>
+        <!-- Chat area -->
+        <ScrollView
+            android:id="@+id/chatScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBar"
+            android:layout_below="@id/topBar"
+            android:padding="16dp"
+            android:overScrollMode="never">
 
-</RelativeLayout>
+            <LinearLayout
+                android:id="@+id/chatContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
 
+        <!-- Bottom input bar -->
+        <LinearLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#000000"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <!-- Left: MIC (voice input) -->
+            <ImageButton
+                android:id="@+id/btnAdd"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_mic"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:contentDescription="Voice input"
+                app:tint="#FFFFFF" />
+
+            <!-- Message input -->
+            <EditText
+                android:id="@+id/inputMessage"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/input_bg"
+                android:hint="Ask DocuLink"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textSize="16sp"
+                android:inputType="text" />
+
+            <!-- Right: SEND button -->
+            <ImageButton
+                android:id="@+id/btnMic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle_button_bg"
+                android:src="@drawable/ic_send"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:contentDescription="Send message"
+                app:tint="#FFFFFF" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- Drawer content -->
     <LinearLayout
         android:id="@+id/drawerContent"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="20dp"
         android:background="@color/ml_bg">
 
-        <TextView
-            android:id="@+id/drawerTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DocuLink Navigation"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/ml_primary"
-            android:paddingBottom="16dp" />
-
+        <!-- User/profile section -->
         <LinearLayout
+            android:id="@+id/profileSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="12dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="16dp">
 
+            <!-- Simple avatar circle -->
             <TextView
-                android:id="@+id/navDashboard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
-                android:paddingHorizontal="8dp"
-                android:text="Kochi Metro Dashboard"
-                android:textSize="15sp"
-                android:textColor="@color/ml_primary" />
+                android:id="@+id/avatarCircle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="DL"
+                android:textStyle="bold"
+                android:textColor="@color/ml_bg"
+                android:background="@drawable/circle_button_bg" />
 
-            <TextView
-                android:id="@+id/navDocuments"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
-                android:paddingHorizontal="8dp"
-                android:text="Embedded Documents"
-                android:textSize="15sp"
-                android:textColor="@color/ml_primary" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+
+                <TextView
+                    android:id="@+id/drawerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DocuLink Navigation"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/ml_primary" />
+
+                <TextView
+                    android:id="@+id/drawerSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DocuLink • RAG App"
+                    android:textSize="12sp"
+                    android:textColor="@color/ml_muted" />
+            </LinearLayout>
         </LinearLayout>
 
+        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/ml_chip_bg"
-            android:layout_marginVertical="12dp" />
+            android:layout_marginBottom="12dp" />
 
+        <!-- MAIN SECTION LABEL -->
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/ml_muted"
+            android:paddingHorizontal="4dp"
+            android:paddingBottom="4dp" />
+
+        <!-- Dashboard item -->
+        <TextView
+            android:id="@+id/navDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="8dp"
+            android:text="DocuLink Dashboard"
+            android:textSize="15sp"
+            android:textColor="@color/ml_primary"
+            android:background="?attr/selectableItemBackground" />
+
+        <!-- Documents item -->
+        <TextView
+            android:id="@+id/navDocuments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="8dp"
+            android:text="Embedded Documents"
+            android:textSize="15sp"
+            android:textColor="@color/ml_primary"
+            android:background="?attr/selectableItemBackground" />
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/ml_chip_bg"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- SECONDARY SECTION LABEL -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="More"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/ml_muted"
+            android:paddingHorizontal="4dp"
+            android:paddingBottom="4dp" />
+
+        <!-- Settings -->
+        <TextView
+            android:id="@+id/navSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="12dp"
             android:paddingHorizontal="8dp"
             android:text="Settings"
             android:textSize="15sp"
-            android:textColor="@color/ml_muted" />
+            android:textColor="@color/ml_muted"
+            android:background="?attr/selectableItemBackground" />
 
+        <!-- Help & Support -->
         <TextView
+            android:id="@+id/navHelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="12dp"
             android:paddingHorizontal="8dp"
-            android:text="Help &amp; Support"
+            android:text="Help and Support"
             android:textSize="15sp"
-            android:textColor="@color/ml_muted" />
+            android:textColor="@color/ml_muted"
+            android:background="?attr/selectableItemBackground" />
+
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
