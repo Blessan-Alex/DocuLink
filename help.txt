@@ -1,539 +1,251 @@
-Nice, this is a fun fit for your app. Let’s add **two simple Android screens** that simulate the web UI:
-
-1. **Kochi Metro Dashboard**
-2. **Embedded Documents**
-
-Everything below is:
-
-* Plain **XML layouts**
-* Very simple **Kotlin**
-* Uses only `ScrollView`, `LinearLayout`, `RecyclerView`, `CardView`
-* Uses **dummy data** so it “just works” as a simulation.
-
-You can wire these to your existing `LandingActivity` / `ChatActivity` however you like.
-
----
-
-## 0. Colors (optional but recommended)
-
-Add some light-theme colors in `res/values/colors.xml`:
-
-```xml
-<resources>
-    <color name="ml_bg">#F5F7FB</color>
-    <color name="ml_card_bg">#FFFFFF</color>
-    <color name="ml_primary">#111827</color>
-    <color name="ml_accent">#111827</color>
-    <color name="ml_muted">#6B7280</color>
-    <color name="ml_chip_bg">#EEF2FF</color>
-    <color name="ml_chip_text">#4B5563</color>
-    <color name="ml_badge_high">#F97373</color>
-    <color name="ml_badge_medium">#FACC15</color>
-</resources>
-```
-
----
-
-## 1. Metro Dashboard Screen
-
-### 1.1 Layout – `res/layout/activity_metro_dashboard.xml`
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/metroScroll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/ml_bg">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- Top Title Row -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingBottom="16dp">
-
-            <TextView
-                android:id="@+id/txtMetroTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="KOCHI METRO DASHBOARD"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/ml_primary" />
-
-            <Button
-                android:id="@+id/btnRole"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Safety Supervisor" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Metro Link AI System • Document Processing & Management"
-            android:textSize="13sp"
-            android:textColor="@color/ml_muted"
-            android:paddingBottom="16dp" />
-
-        <!-- Metrics Row -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:paddingBottom="12dp">
-
-            <!-- Documents Processed -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/ml_card_bg"
-                android:padding="16dp"
-                android:elevation="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Documents Processed"
-                    android:textSize="13sp"
-                    android:textColor="@color/ml_muted" />
-
-                <TextView
-                    android:id="@+id/txtDocsProcessed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1,247"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/ml_primary"
-                    android:paddingTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+12% from last month"
-                    android:textSize="12sp"
-                    android:textColor="@color/ml_muted"
-                    android:paddingTop="4dp" />
-            </LinearLayout>
-
-            <!-- Pending Reviews -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/ml_card_bg"
-                android:padding="16dp"
-                android:elevation="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pending Reviews"
-                    android:textSize="13sp"
-                    android:textColor="@color/ml_muted" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="23"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/ml_primary"
-                    android:paddingTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Requires human review"
-                    android:textSize="12sp"
-                    android:textColor="@color/ml_muted"
-                    android:paddingTop="4dp" />
-            </LinearLayout>
-
-            <!-- Active Notifications -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/ml_card_bg"
-                android:padding="16dp"
-                android:elevation="2dp"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Active Notifications"
-                    android:textSize="13sp"
-                    android:textColor="@color/ml_muted" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/ml_primary"
-                    android:paddingTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Urgent matters"
-                    android:textSize="12sp"
-                    android:textColor="@color/ml_muted"
-                    android:paddingTop="4dp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Human Review Tasks (simple list) -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Human Review Tasks"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/ml_primary"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/ml_card_bg"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:elevation="2dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Incident Report - Signal Failure"
-                android:textStyle="bold"
-                android:textColor="@color/ml_primary"
-                android:paddingBottom="2dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="high"
-                android:textSize="11sp"
-                android:padding="4dp"
-                android:background="@color/ml_badge_high"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submitted by: Station Master - Aluva"
-                android:textSize="12sp"
-                android:textColor="@color/ml_muted" />
-        </LinearLayout>
-
-        <!-- Button to open Documents screen -->
-        <Button
-            android:id="@+id/btnOpenDocuments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Embedded Documents"
-            android:layout_marginTop="24dp" />
-
-    </LinearLayout>
-</ScrollView>
-```
-
-### 1.2 Kotlin – `MetroDashboardActivity.kt`
-
-```kotlin
-package com.example.doculink
-
-import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.widget.Button
-
-class MetroDashboardActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_metro_dashboard)
-
-        // Simple navigation to documents screen
-        findViewById<Button>(R.id.btnOpenDocuments).setOnClickListener {
-            startActivity(Intent(this, EmbeddedDocumentsActivity::class.java))
-        }
-    }
-}
-```
-
----
-
-## 2. Embedded Documents Screen
-
-### 2.1 List item – `res/layout/item_document_card.xml`
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
-    android:elevation="2dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtDocTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Document Title"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/ml_primary" />
-
-        <TextView
-            android:id="@+id/txtDocTag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Financial"
-            android:textSize="11sp"
-            android:textColor="@color/ml_chip_text"
-            android:background="@color/ml_chip_bg"
-            android:padding="4dp"
-            android:layout_marginTop="4dp" />
-
-        <TextView
-            android:id="@+id/txtDocDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Short description of the document."
-            android:textSize="13sp"
-            android:textColor="@color/ml_muted"
-            android:layout_marginTop="6dp" />
-
-        <TextView
-            android:id="@+id/txtDocMeta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2025-01-15 • 2.3 MB"
-            android:textSize="11sp"
-            android:textColor="@color/ml_muted"
-            android:layout_marginTop="6dp" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
-```
-
-### 2.2 Screen layout – `res/layout/activity_embedded_documents.xml`
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/ml_bg"
-    android:padding="16dp">
-
-    <!-- Header -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EMBEDDED DOCUMENTS"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/ml_primary"
-        android:paddingBottom="4dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="AI-powered document collection for metro operations, maintenance, and safety protocols."
-        android:textSize="13sp"
-        android:textColor="@color/ml_muted"
-        android:paddingBottom="12dp" />
-
-    <!-- Simple counts row -->
-    <TextView
-        android:id="@+id/txtDocCounts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="11 documents available • 0 selected"
-        android:textSize="12sp"
-        android:textColor="@color/ml_muted"
-        android:paddingBottom="12dp" />
-
-    <!-- List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDocuments"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-</LinearLayout>
-```
-
-### 2.3 Kotlin – data + adapter + activity
-
-**`DocumentItem.kt`**
-
-```kotlin
-package com.example.doculink
-
-data class DocumentItem(
-    val title: String,
-    val tag: String,
-    val description: String,
-    val date: String,
-    val size: String
-)
-```
-
-**`DocumentAdapter.kt`**
-
-```kotlin
-package com.example.doculink
-
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-
-class DocumentAdapter(
-    private val items: List<DocumentItem>,
-    private val onItemClick: (DocumentItem) -> Unit
-) : RecyclerView.Adapter<DocumentAdapter.DocViewHolder>() {
-
-    inner class DocViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.txtDocTitle)
-        val tag: TextView = view.findViewById(R.id.txtDocTag)
-        val desc: TextView = view.findViewById(R.id.txtDocDescription)
-        val meta: TextView = view.findViewById(R.id.txtDocMeta)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DocViewHolder {
-        val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_document_card, parent, false)
-        return DocViewHolder(v)
-    }
-
-    override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
-        val item = items[position]
-        holder.title.text = item.title
-        holder.tag.text = item.tag
-        holder.desc.text = item.description
-        holder.meta.text = "${item.date} • ${item.size}"
-
-        holder.itemView.setOnClickListener { onItemClick(item) }
-    }
-
-    override fun getItemCount(): Int = items.size
-}
-```
-
-**`EmbeddedDocumentsActivity.kt`**
-
-```kotlin
-package com.example.doculink
-
-import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
-class EmbeddedDocumentsActivity : AppCompatActivity() {
-
-    private lateinit var recycler: RecyclerView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_embedded_documents)
-
-        recycler = findViewById(R.id.recyclerDocuments)
-        recycler.layoutManager = LinearLayoutManager(this)
-
-        val demoDocs = listOf(
-            DocumentItem(
-                "Financial Invoice - Traction Motor",
-                "Financial",
-                "Invoice for traction motor services and maintenance",
-                "2025-01-15",
-                "2.3 MB"
-            ),
-            DocumentItem(
-                "Incident Report - Emergency Brake",
-                "Safety",
-                "Detailed incident report for emergency brake failure",
-                "2025-01-14",
-                "1.8 MB"
-            ),
-            DocumentItem(
-                "Incident Report - Signal Failure",
-                "Safety",
-                "Signal system failure incident documentation",
-                "2025-01-13",
-                "2.1 MB"
-            )
-        )
-
-        recycler.adapter = DocumentAdapter(demoDocs) { doc ->
-            Toast.makeText(this, "Clicked: ${doc.title}", Toast.LENGTH_SHORT).show()
-        }
-    }
-}
-```
-
----
-
-## 3. Wire it into your app
-
-In `AndroidManifest.xml` add:
-
-```xml
-<activity android:name=".MetroDashboardActivity" />
-<activity android:name=".EmbeddedDocumentsActivity" />
-```
-
-From any existing screen (e.g. `LandingActivity` or `ChatActivity`), you can open the Metro dashboard:
-
-```kotlin
-startActivity(Intent(this, MetroDashboardActivity::class.java))
-```
-
----
-
-This keeps everything **simple**, but visually close to your web UI:
-
-* Light cards on soft grey background
-* Clear hierarchy (big numbers, small labels)
-* Document cards with titles, tags, description, meta info
-
-Once you’re happy with the look, you can gradually hook these screens to your real backend instead of the dummy data.
+DocuLink – Multilingual RAG Application for Corporate Knowledge 
+1. Introduction 
+1.1 Background 
+Large enterprises generate massive volumes of unstructured documents: policies, contracts, incident reports, 
+technical drawings, maintenance logs, scanned PDFs, and emails. These often sit scattered across tools like 
+email, SharePoint, Maximo, network drives, and cloud folders. 
+Employees waste time searching, re-reading, and forwarding documents instead of getting direct answers to 
+business questions (e.g., “What is the SOP for signal failure?” or “What’s the latest safety policy for platform 
+operations?”). 
+1.2 Problem Statement 
+Traditional document management systems are: 
+• Siloed – each department has its own tools and folders. 
+• Search-poor – keyword search struggles with PDFs, images, bilingual content, and domain-specific 
+jargon. 
+• Not conversational – users must know file names or keywords instead of asking questions in 
+natural language. 
+• Not multilingual – especially for organizations where English and a local language (e.g., Malayalam) 
+coexist. 
+There is a clear need for a central, intelligent, multilingual knowledge layer across all corporate 
+documents that can: 
+• Understand English and Malayalam, 
+• Work over PDFs, scans, images, technical documents, 
+• Provide traceable, source-linked answers, and 
+• Be accessible via mobile chat + voice for on-ground staff. 
+2. Project Objectives 
+DocuLink is designed to: 
+1. Centralize corporate documents into a single, searchable knowledge repository. 
+2. Enable multilingual RAG (Retrieval-Augmented Generation) across English and Malayalam 
+documents. 
+3. Provide conversational access via Android app (text + voice). 
+4. Support role-based, department-specific access for different corporate functions.  
+5. Automate ingestion and embedding of documents from multiple sources (email, SharePoint, 
+Maximo, uploaded files). 
+6. Deliver trustworthy answers with citations pointing back to original documents. 
+7. Scale to enterprise workloads using OpenSearch, Redis, and a microservice-style backend. 
+3. System Description (High-Level) 
+DocuLink is a mobile-first corporate knowledge system with: 
+• An Android app (Kotlin) that provides: 
+o Secure login (Firebase Auth) 
+o Chat-style interface 
+o Voice input (speech-to-text) 
+o A dashboard of embedded documents 
+• A Python FastAPI backend that: 
+o Stores and searches document embeddings in OpenSearch (vector + hybrid search). 
+o Uses Vyākhyarth (vyakyarth) multilingual embedding model for English/Malayalam 
+vectorization. 
+o Calls Gemini for answer generation, guided by retrieved context. 
+o Orchestrates document ingestion and embeddings via Redis-backed queues and workers. 
+• A document ingestion & processing pipeline that:  
+o Accepts uploads (from Android app, email, cloud links). 
+o Performs OCR for scanned PDFs/images. 
+o Detects language (English/Malayalam). 
+o Summarizes and categorizes documents. 
+o Stores embeddings + metadata in OpenSearch and references in Firestore. 
+4. Proposed Solution 
+4.1 Central Knowledge Repository 
+A single OpenSearch index (plus supporting indices) acts as the corporate knowledge base for all ingested 
+documents. DocuLink stores: 
+• Raw text chunks (extracted from PDFs, images, etc.) 
+• Vector embeddings (using Vyākhyarth) 
+• Metadata (department, type, date, source system, language, access role) 
+4.2 Secure Ingestion Gateway 
+Documents can arrive via:  
+• Android upload (Firebase Storage → embedding pipeline) 
+• Enterprise systems (e.g., Maximo, SharePoint) 
+• Emails and cloud links (future connectors) 
+Each file is queued in Redis for: 
+1. OCR & text extraction 
+2. Language detection (en / ml) 
+3. Chunking and embedding 
+4. Indexing into OpenSearch 
+4.3 Conversational Multilingual RAG 
+The Android app sends user queries to /api/query. Backend pipeline: 
+1. Generate multilingual embedding of the query. 
+2. Hybrid search in OpenSearch (BM25 + vector similarity). 
+3. Select top-k context chunks with metadata. 
+4. Construct a prompt for Gemini with instructions: 
+o Answer in Malayalam if question is Malayalam, else English. 
+o Use context, and mention if context is insufficient. 
+5. Return answer + citations to the app, which displays it as chat bubbles. 
+5. Technical Approach 
+5.1 RAG Architecture 
+• Retriever: 
+o Vyākhyarth embedding model to embed both English & Malayalam queries and chunks. 
+o Hybrid search in OpenSearch (vector + keyword) for robust retrieval. 
+• Generator (LLM): 
+o Gemini 2.0 Flash via Google Generative AI API. 
+o Custom prompt instructing role-aware, multilingual behavior, grounded in context. 
+• Indexing: 
+o Documents are split into chunks (e.g., 512–1024 tokens). 
+o Each chunk stored with: 
+▪ document_id, chunk_index, text, similarity_score (later), department, language, 
+source. 
+5.2 Android Client 
+• Authentication: 
+o Firebase Authentication (email/password). 
+• UI: 
+o ChatActivity with drawer navigation (Dashboard, Embedded Documents). 
+o Chat bubbles for user and system messages. 
+o Voice input using Android RecognizerIntent (supports en-IN, ml-IN). 
+o “Embedded Documents” screen with a RecyclerView of DocumentItem. 
+• Networking: 
+o Http.sendQuery() uses HttpURLConnection to POST JSON to 
+http://127.0.0.1:8080/api/query (via adb reverse). 
+o Response parsed into QueryResponse, and response field displayed in chat. 
+• Document Uploads: 
+o EmbeddedDocumentsActivity uses Android Storage Access Framework to pick files. 
+o Uploads to Firebase Storage, writes metadata to Firestore with status = 
+"embedding_in_progress" and shows toast: 
+▪ “Embedding started… Estimated time ≈ 10 minutes.” 
+o Backend (or future pipeline) flips status to ready after embeddings are computed. 
+5.3 Backend & Pipelines 
+• FastAPI service: 
+o Endpoints: /api/query, /api/health, /api/departments, /api/stats, /api/speech-to-text. 
+o Asynchronous handlers using async/await and ThreadPoolExecutor for blocking operations. 
+• OpenSearch: 
+o Dedicated index embeddings_index for document chunks. 
+o Hybrid search function implemented in OpenSearchQueryProcessor. 
+• Redis Queue (planned/used): 
+o For asynchronous embedding + indexing of new documents. 
+• Speech-to-text endpoint: 
+o /api/speech-to-text accepts audio files and leverages Gemini’s multimodal capabilities for 
+transcription (optional alternative to device STT). 
+6. Tech Stack 
+Frontend (Android) 
+• Language: Kotlin 
+• Framework: Native Android (View-based UI) 
+• Libraries/Services: 
+o Firebase Auth (user management) 
+o Firebase Firestore (document metadata) 
+o Firebase Storage (file uploads) 
+Backend 
+• API: Python, FastAPI 
+• LLM: Google Gemini 2.0 Flash 
+• Embeddings: Vyākhyarth multilingual embedding model 
+• Search Engine: OpenSearch (vector + BM25 hybrid) 
+• Queue / Orchestration: Redis + background workers (e.g., Celery/RQ or custom workers) 
+• Storage: 
+o OpenSearch indices 
+o (Optional) PostgreSQL / other DB for structured metadata & job tracking 
+Infrastructure & Tools 
+• adb reverse for Android → local backend connectivity during development 
+• Logging via Python logging module 
+• JSON serialization via pydantic and Gson (Android) 
+7. System Workflow 
+7.1 Document Ingestion Flow 
+1. User uploads a file from Android. 
+2. File stored in Firebase Storage; metadata written to Firestore with status = 
+"embedding_in_progress". 
+3. Document path pushed to Redis queue for processing. 
+4. Worker: 
+o Downloads file 
+o Runs OCR/Text extraction & language detection 
+o Chunks text and computes Vyākhyarth embeddings 
+o Indexes chunks into OpenSearch with metadata 
+o Updates Firestore status = "ready". 
+5. Android app receives updated status via Firestore snapshot listener and displays “Embedded” in list. 
+7.2 Query → Answer Flow 
+1. User enters text or uses voice in Android. 
+2. App sends QueryRequest to FastAPI /api/query. 
+3. Backend: 
+o Generates embedding for query. 
+o Runs hybrid search in OpenSearch. 
+o Builds context prompt and calls Gemini. 
+o Returns QueryResponse with response and context_documents. 
+4. App shows system reply as chat bubble, while optionally allowing future UI to display “Sources” 
+from context_documents. 
+8. Feasibility and Viability 
+8.1 Technical Feasibility 
+• All components (Android, FastAPI, OpenSearch, Redis, Gemini) are mature and well-documented. 
+• RAG architecture is a proven pattern for enterprise knowledge management. 
+• Vyākhyarth embeddings + Gemini handle English/Malayalam mix, which matches real corporate 
+usage. 
+8.2 Operational Feasibility 
+• Mobile-first access is ideal for field staff, supervisors, and managers. 
+• Existing corporate systems (SharePoint, Maximo, email) can be connected incrementally via ingestion 
+connectors. 
+• Role-based access and department-level scoping align with existing organizational structures.  
+8.3 Economic Viability 
+• OpenSearch and Redis are open-source, reducing infrastructure licensing costs. 
+• Gemini usage can be controlled via quotas and caching, with potential to swap to alternative models 
+if required. 
+• Time saved in retrieval, compliance checks, and incident handling can justify the deployment cost, 
+especially for large document-heavy organizations. 
+9. Challenges and Mitigation Strategies 
+1. LLM / API Quotas & Costs 
+o Challenge: External LLM (Gemini) has rate and cost limits. 
+o Strategy: 
+▪ Aggressive retrieval to minimize tokens per call. 
+▪ Result caching for repeated queries. 
+▪ Fallback explanations when quota exceeded (handled gracefully in Android UI). 
+2. Data Privacy & Security 
+o Challenge: Corporate documents may be sensitive (financials, incident reports, HR). 
+o Strategy: 
+▪ Secure storage and network (HTTPS, access control). 
+▪ Role-based metadata and filtered retrieval. 
+▪ Consider on-prem or VPC-hosted OpenSearch and backend for regulated sectors. 
+3. Multilingual Accuracy (English/Malayalam) 
+o Challenge: Code-mixed queries and bilingual documents. 
+o Strategy: 
+▪ Use a multilingual embedding model (Vyākhyarth). 
+▪ Prompt engineering to enforce language-specific answer behavior. 
+▪ Continual evaluation with real corporate queries. 
+4. Document Quality (Scans, Images, Old PDFs) 
+o Challenge: Poor scans and legacy documents reduce OCR quality. 
+o Strategy: 
+▪ Pre-processing: image enhancement, DPI checks. 
+▪ Human-in-the-loop review for low-confidence OCR. 
+▪ Flagging of low-quality sources in metadata and UI. 
+5. User Adoption 
+o Challenge: Employees may still search manually or rely on email chains. 
+o Strategy: 
+▪ Simple chat-style UX and voice input. 
+▪ Demonstrate fast answers vs. manual search. 
+▪ Start with high-value use cases (safety, compliance, incident handling). 
+10. Impact and Benefits 
+For corporate clients, DocuLink delivers:  
+• Single Source of Truth for all documents, searchable in natural language. 
+• Reduced Time-to-Answer for policy, SOP, and compliance questions. 
+• Improved Safety & Compliance via fast retrieval of the latest rules and incident guidelines. 
+• Empowered Frontline Staff with mobile & voice-accessible knowledge. 
+• Better Governance with role-based access and document traceability (citations). 
+• Scalable Foundation for future analytics like risk scoring, trend detection, and proactive alerts. 
+11. Screenshots  
+• Screenshot 1: Login screen (Firebase Auth) 
+•  
+• Screenshot 2: Metro Dashboard (Kochi Metro / corporate dashboard view) 
+•  
+• Screenshot 3: Chat screen showing bilingual query and answer (English & Malayalam) 
+•  
+•  
+• Screenshot 4: Embedded Documents list with status (“Embedding in progress”, “Embedded”) 
+•  
+• Screenshot 5: Sidebar 
+•  
+12. GitHub Repository 
+GitHub: https://github.com/Blessan-Alex/DocuLink 
+13. Presentation Link 
+Presentation: https://docs.google.com/presentation/ 
+13. Research and References 
+1. OpenSearch Documentation – Vector search, hybrid search, and index design for high-scale 
+retrieval. 
+2. Redis Documentation – Queues and background job processing for asynchronous ingestion. 
+3. PostgreSQL / Relational DB Docs – For structured metadata, logging, and audit trails. 
+4. Google Gemini API Docs – Generative model usage, safety, quotas, and best practices. 
+5. Vyākhyarth Embedding Model Docs – Multilingual (English/Malayalam) sentence embeddings. 
+6. OCR & Multilingual NLP – Tesseract OCR and related AI APIs for scanned document text 
+extraction. 
+7. Retrieval-Augmented Generation for Large Language Models: A Survey – Comprehensive overview of RAG 
+design patterns. 
+8. Case studies on intelligent document management in enterprises and AI-based compliance support. 
