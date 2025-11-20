@@ -13,3 +13,49 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.env
+.env.example
+backend/.env
+backend/.env.local
+backend/.env.*
+**/.env
+**/.env.local
+
+# API Keys and credentials
+*credentials*.json
+*service-account*.json
+*oauth*.json
+secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

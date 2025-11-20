@@ -47,7 +47,9 @@ app.add_middleware(
 )
 
 # Configure Gemini API
-GEMINI_API_KEY = "AIzaSyCR-YwTzAmmrU3nsuDj8cDYOaD1yrTx8TY"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY environment variable is required")
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Initialize Gemini model (Gemini 2.0 Flash)

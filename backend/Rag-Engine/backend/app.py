@@ -27,7 +27,9 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend
 
 # Configure Gemini API
-GEMINI_API_KEY = "AIzaSyCn10Dq_CBqwllD3R3Qt8oh2VLIZkrpbCY"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY environment variable is required")
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Initialize Gemini model (Gemini 2.0 Flash)

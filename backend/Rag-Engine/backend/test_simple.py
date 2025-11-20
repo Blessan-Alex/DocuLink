@@ -80,7 +80,11 @@ def test_gemini():
     
     try:
         import google.generativeai as genai
-        genai.configure(api_key="AIzaSyCn10Dq_CBqwllD3R3Qt8oh2VLIZkrpbCY")
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            print("❌ GEMINI_API_KEY environment variable not set")
+            return False
+        genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-2.0-flash-exp')
         
         # Simple test
